@@ -13,10 +13,22 @@ let users = [
 ]
 
 app.get("/tasks", (req,res)=>{
+    let text = req.params.text
+    if(text!=undefined){
+        let tasksText = tasks.filter(t=>t.text.indexOf(text)!=-1)
+        res.send(tasksText)
+        return
+    }
     res.send(tasks)
 })
 
 app.get("/users", (req,res)=>{
+    let email = req.query.email
+    if(email!=undefined){
+        let usersEmail = users.filter(u=>u.email==email)
+        res.send(usersEmail)
+        return
+    }
     res.send(users)
 })
 
